@@ -65,7 +65,7 @@ public class IncidenciaController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Incidencia> deleteCurso(@PathVariable int id, @RequestBody Incidencia incidencia){
+    public ResponseEntity<Incidencia> deleteCurso(@PathVariable int id, Incidencia incidencia){
         Incidencia buscado = incidenciaService.findById(incidencia.getId());
         if(buscado == null)
         {
