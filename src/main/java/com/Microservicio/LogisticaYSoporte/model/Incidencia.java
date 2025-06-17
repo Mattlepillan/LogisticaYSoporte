@@ -23,6 +23,9 @@ public class Incidencia {
     private int id;
 
     @Column(length = 500, nullable = false)
+    private String encargado;
+
+    @Column(length = 500, nullable = false)
     private String descripcion;
 
     @Column(length = 100, nullable = false)

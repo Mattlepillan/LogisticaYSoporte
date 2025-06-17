@@ -58,8 +58,6 @@ public class IncidenciaController {
         }
         else
         {
-            buscado.setDescripcion(incidencia.getDescripcion());
-            buscado.setEstado(incidencia.getEstado());
             return new ResponseEntity<>(incidenciaService.save(incidencia),HttpStatus.OK);
         }
     }

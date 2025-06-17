@@ -21,6 +21,14 @@ public class IncidenciaService {
         return incidenciaRepository.save(incidencia);       
     }
 
+    public Incidencia actualizarIncidencia(int id, Incidencia incidencia){
+        Incidencia buscado = incidenciaRepository.findById(id);
+        buscado.setDescripcion(incidencia.getDescripcion());
+        buscado.setEncargado(incidencia.getEncargado());
+        buscado.setEstado(incidencia.getEstado());
+        return incidenciaRepository.save(incidencia);
+    }
+
     public Incidencia findById(int id){
         return incidenciaRepository.findById(id);
     }
