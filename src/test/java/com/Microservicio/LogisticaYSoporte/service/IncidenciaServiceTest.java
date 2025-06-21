@@ -84,10 +84,10 @@ public class IncidenciaServiceTest {
 
     @Test
     void deleteTest(){
-        Incidencia i1 = new Incidencia(1, "Matias Dias", "Caida de servidor", "Abierta");
-        doNothing().when(incidenciaRepository).delete(i1);
-        incidenciaService.delete(i1);
-        verify(incidenciaRepository, times(1)).delete(i1);
+        int id = 1;
+        doNothing().when(incidenciaRepository).deleteById(id);
+        incidenciaService.deleteById(id);
+        verify(incidenciaRepository, times(1)).deleteById(id);
     }
     
 }

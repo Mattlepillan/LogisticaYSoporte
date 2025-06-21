@@ -33,8 +33,8 @@ public class IncidenciaService {
         return incidenciaRepository.findById(id);
     }
     
-    public void delete(Incidencia incidencia){
-        incidenciaRepository.delete(incidencia);
+    public void deleteById(int id){
+        incidenciaRepository.deleteById(id);
     }
     
 }

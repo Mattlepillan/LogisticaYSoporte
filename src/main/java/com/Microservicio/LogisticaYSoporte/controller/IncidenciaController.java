@@ -51,29 +51,22 @@ public class IncidenciaController {
 
     @PutMapping("/{id}")
     public ResponseEntity<Incidencia> putIncidencia(@PathVariable int id, @RequestBody Incidencia incidencia){
-        Incidencia buscado = incidenciaService.findById(incidencia.getId());
-        if(buscado == null)
+        if(incidencia == null)
         {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
         else
         {
+            incidencia.setId(id);
             return new ResponseEntity<>(incidenciaService.save(incidencia),HttpStatus.OK);
         }
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Incidencia> deleteCurso(@PathVariable int id, Incidencia incidencia){
-        Incidencia buscado = incidenciaService.findById(incidencia.getId());
-        if(buscado == null)
-        {
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-        }
-        else
-        {
-            incidenciaService.delete(incidencia);
-            return new ResponseEntity<>( HttpStatus.OK);
-        }
+    public ResponseEntity<Incidencia> deleteIncidencia(@PathVariable int id, Incidencia incidencia){
+       
+        incidenciaService.deleteById(id);
+        return new ResponseEntity<>( HttpStatus.OK);
     }
     
 }
