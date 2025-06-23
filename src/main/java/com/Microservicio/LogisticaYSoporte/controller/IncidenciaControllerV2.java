@@ -51,7 +51,7 @@ public class IncidenciaControllerV2 {
                 .body(assembler.toModel(newIncidencia));
     }
 
-    @PutMapping(value = "/{codigo}", produces = MediaTypes.HAL_JSON_VALUE)
+    @PutMapping(value = "/{id}", produces = MediaTypes.HAL_JSON_VALUE)
     public ResponseEntity<EntityModel<Incidencia>> updateCarrera(@PathVariable int id, @RequestBody Incidencia incidencia) {
         incidencia.setId(id);
         Incidencia updatedIncidencia = incidenciaService.save(incidencia);
@@ -59,7 +59,7 @@ public class IncidenciaControllerV2 {
                 .ok(assembler.toModel(updatedIncidencia));
     }
 
-    @DeleteMapping(value = "/{codigo}", produces = MediaTypes.HAL_JSON_VALUE)
+    @DeleteMapping(value = "/{id}", produces = MediaTypes.HAL_JSON_VALUE)
     public ResponseEntity<?> deleteIncidencia(@PathVariable int id) {
         incidenciaService.deleteById(id);;
         return ResponseEntity.noContent().build();

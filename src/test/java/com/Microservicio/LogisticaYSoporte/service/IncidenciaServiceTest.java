@@ -34,8 +34,8 @@ public class IncidenciaServiceTest {
 
     @Test
     void saveTest(){
-        Incidencia incidencia = new Incidencia(1, "Matias Dias", "Caida de servidor", "Abierta");
-        Incidencia incidenciaGuardada = new Incidencia(1, "Matias Dias", "aidad de servidor", "Abierta");
+        Incidencia incidencia = new Incidencia(0, "Matias Dias", "Caida de servidor", "Abierta");
+        Incidencia incidenciaGuardada = new Incidencia(1, "Matias Dias", "Caidad de servidor", "Abierta");
         when(incidenciaRepository.save(incidencia)).thenReturn(incidenciaGuardada);
 
         Incidencia resultado = incidenciaService.save(incidencia);
