@@ -36,7 +36,8 @@ public class IncidenciaController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Operación exitosa",
                     content = @Content(mediaType = "application/json",
-                            schema = @Schema(implementation = Incidencia.class)))
+                            schema = @Schema(implementation = Incidencia.class))),
+            @ApiResponse(responseCode = "404", description = "No hay contenido para mostrar")                
     })
 
     public ResponseEntity<List<Incidencia>> getIncidencia(){
