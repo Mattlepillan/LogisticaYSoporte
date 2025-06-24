@@ -23,10 +23,10 @@ import static org.mockito.ArgumentMatchers.any;
 public class IncidenciaControllerTest {
 
      @Autowired
-    private MockMvc mockMvc; // Proporciona una manera de realizar peticiones HTTP en las pruebas
+    private MockMvc mockMvc; 
 
     @MockBean
-    private IncidenciaService incidenciaService; // Crea un mock del servicio de Estudiante
+    private IncidenciaService incidenciaService;
 
     @Autowired
     private ObjectMapper objectMapper;

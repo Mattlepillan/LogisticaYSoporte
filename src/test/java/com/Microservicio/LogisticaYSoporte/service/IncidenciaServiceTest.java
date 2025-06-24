@@ -35,11 +35,14 @@ public class IncidenciaServiceTest {
     @Test
     void saveTest(){
         Incidencia incidencia = new Incidencia(0, "Matias Dias", "Caida de servidor", "Abierta");
-        Incidencia incidenciaGuardada = new Incidencia(1, "Matias Dias", "Caidad de servidor", "Abierta");
+        Incidencia incidenciaGuardada = new Incidencia(1, "Matias Dias", "Caida de servidor", "Abierta");
         when(incidenciaRepository.save(incidencia)).thenReturn(incidenciaGuardada);
 
         Incidencia resultado = incidenciaService.save(incidencia);
         assertThat(resultado.getId()).isEqualTo(1);
+        assertThat(resultado.getEncargado()).isEqualTo("Matias Dias");
+        assertThat(resultado.getDescripcion()).isEqualTo("Caida de servidor");
+        assertThat(resultado.getEstado()).isEqualTo("Abierta");
         verify(incidenciaRepository).save(incidencia);
     }
 
