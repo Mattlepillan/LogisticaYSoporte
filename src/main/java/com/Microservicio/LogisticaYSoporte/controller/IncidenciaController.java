@@ -88,7 +88,6 @@ public class IncidenciaController {
         }
         else
         {
-            incidencia.setId(id);
             return new ResponseEntity<>(incidenciaService.save(incidencia),HttpStatus.OK);
         }
     }
