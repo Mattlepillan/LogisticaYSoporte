@@ -45,19 +45,6 @@ public class IncidenciaControllerTest {
         incidencia.setEstado("Abierta");
     }
 
-
-    @Test
-    public void getIncidenciaTest() throws Exception{
-        when(incidenciaService.listarTodos()).thenReturn(Arrays.asList(incidencia));
-
-        mockMvc.perform(get("/api/incidencia"))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$[0].id").value(1))
-                .andExpect(jsonPath("$[0].encargado").value("Matias Dias"))
-                .andExpect(jsonPath("$[0].descripcion").value("Caida de servidor"))
-                .andExpect(jsonPath("$[0].estado").value("Abierta"));  
-    }
-
     @Test
     public void createIncidenciaTest() throws Exception{
         when(incidenciaService.save(any(Incidencia.class))).thenReturn(incidencia);
@@ -73,17 +60,45 @@ public class IncidenciaControllerTest {
     }
 
     @Test
+    public void getIncidenciaTest() throws Exception{
+        when(incidenciaService.listarTodos()).thenReturn(Arrays.asList(incidencia));
+
+        mockMvc.perform(get("/api/incidencia"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$[0].id").value(1))
+                .andExpect(jsonPath("$[0].encargado").value("Matias Dias"))
+                .andExpect(jsonPath("$[0].descripcion").value("Caida de servidor"))
+                .andExpect(jsonPath("$[0].estado").value("Abierta"));  
+    }
+
+    @Test
+    public void getIncidenciaByIdTest() throws Exception{
+        when(incidenciaService.findById(incidencia.getId())).thenReturn(incidencia);
+
+        mockMvc.perform(get("/api/incidencia/1"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.id").value(1))
+                .andExpect(jsonPath("$.encargado").value("Matias Dias"))
+                .andExpect(jsonPath("$.descripcion").value("Caida de servidor"))
+                .andExpect(jsonPath("$.estado").value("Abierta")); 
+    }
+
+
+
+    @Test
     public void actualizarIncidenciaTest() throws Exception{
-        when(incidenciaService.save(any(Incidencia.class))).thenReturn(incidencia);
+        Incidencia incidenciaAct = new Incidencia(1, "Leonardo Tapia", "Fallo en el sistema de alumnos", "Cerrada");
+        when(incidenciaService.findById(incidencia.getId())).thenReturn(incidencia);
+        when(incidenciaService.save(any(Incidencia.class))).thenReturn(incidenciaAct);
 
         mockMvc.perform(put("/api/incidencia/1")
         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(incidencia)))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id").value(1))
-                .andExpect(jsonPath("$.encargado").value("Matias Dias"))
-                .andExpect(jsonPath("$.descripcion").value("Caida de servidor"))
-                .andExpect(jsonPath("$.estado").value("Abierta"));  
+                .andExpect(jsonPath("$.encargado").value("Leonardo Tapia"))
+                .andExpect(jsonPath("$.descripcion").value("Fallo en el sistema de alumnos"))
+                .andExpect(jsonPath("$.estado").value("Cerrada"));  
     }
 
     @Test
