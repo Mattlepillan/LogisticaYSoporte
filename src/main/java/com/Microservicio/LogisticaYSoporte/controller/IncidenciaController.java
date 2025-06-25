@@ -52,6 +52,14 @@ public class IncidenciaController {
     }
 
     @GetMapping("/{id}")
+    @Operation(summary = "Obtener una incidencia por código", description = "Obtiene una incidencia por su código")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Operación exitosa",
+                    content = @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = Incidencia.class))),
+            @ApiResponse(responseCode = "404", description = "Inciedencia no encontrada")
+    })
+
     public ResponseEntity<Incidencia> BuscarPorId(@PathVariable int id) {
         Incidencia incidencia = incidenciaService.findById(id);
 
