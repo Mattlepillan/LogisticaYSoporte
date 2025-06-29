@@ -33,6 +33,30 @@ public class IncidenciaController {
     @Autowired
     private IncidenciaService incidenciaService;
 
+    @PostMapping
+    @Operation(summary = "Crear una nueva incidencia", description = "Crea una nueva incidencia")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "204", description = "Carrera creada exitosamente",
+                    content = @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = Incidencia.class)))
+    })
+
+    public ResponseEntity<Incidencia> createIncidencia(@RequestBody Incidencia incidencia){
+        Incidencia buscado = incidenciaService.findById(incidencia.getId());
+        if(buscado == null)
+        {
+            return new ResponseEntity<>(incidenciaService.save(incidencia), HttpStatus.CREATED);
+        }
+        else
+        {
+            
+            return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
+        }
+
+
+    }
+
+
     @GetMapping
     @Operation(summary = "Obtener todas las incidencias", description = "Obtiene una lista de todas las incidencias")
     @ApiResponses(value = {
@@ -60,7 +84,7 @@ public class IncidenciaController {
             @ApiResponse(responseCode = "404", description = "Inciedencia no encontrada")
     })
 
-    public ResponseEntity<Incidencia> BuscarPorId(@PathVariable int id) {
+    public ResponseEntity<Incidencia> getIncidenciaById(@PathVariable int id) {
         Incidencia incidencia = incidenciaService.findById(id);
 
         if (incidencia == null)
@@ -71,28 +95,7 @@ public class IncidenciaController {
     }
     
 
-    @PostMapping
-    @Operation(summary = "Crear una nueva incidencia", description = "Crea una nueva incidencia")
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "204", description = "Carrera creada exitosamente",
-                    content = @Content(mediaType = "application/json",
-                            schema = @Schema(implementation = Incidencia.class)))
-    })
-
-    public ResponseEntity<Incidencia> postIncidencia(@RequestBody Incidencia incidencia){
-        Incidencia buscado = incidenciaService.findById(incidencia.getId());
-        if(buscado == null)
-        {
-            return new ResponseEntity<>(incidenciaService.save(incidencia), HttpStatus.CREATED);
-        }
-        else
-        {
-            
-            return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
-        }
-
-
-    }
+    
 
     @PutMapping("/{id}")
     @Operation(summary = "Actualizar una incidencia", description = "Actualiza una incidencia existente")
@@ -104,15 +107,10 @@ public class IncidenciaController {
     })
 
     public ResponseEntity<Incidencia> putIncidencia(@PathVariable int id, @RequestBody Incidencia incidencia){
-        if(incidencia == null)
-        {
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-        }
-        else
-        {
+        
             return new ResponseEntity<>(incidenciaService.save(incidencia),HttpStatus.OK);
-        }
     }
+    
 
     @DeleteMapping("/{id}")
     @Operation(summary = "Eliminar una incidencia", description = "Elimina una incidencia por su código")
