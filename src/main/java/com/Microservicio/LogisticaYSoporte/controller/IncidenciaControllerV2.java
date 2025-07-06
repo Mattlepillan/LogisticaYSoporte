@@ -44,7 +44,7 @@ public class IncidenciaControllerV2 {
     }
 
     @PostMapping(produces = MediaTypes.HAL_JSON_VALUE)
-    public ResponseEntity<EntityModel<Incidencia>> createCarrera(@RequestBody Incidencia incidencia) {
+    public ResponseEntity<EntityModel<Incidencia>> createIncidencia(@RequestBody Incidencia incidencia) {
         Incidencia newIncidencia = incidenciaService.save(incidencia);
         return ResponseEntity
                 .created(linkTo(methodOn(IncidenciaControllerV2.class).getIncidenciaById(newIncidencia.getId())).toUri())
@@ -52,7 +52,7 @@ public class IncidenciaControllerV2 {
     }
 
     @PutMapping(value = "/{id}", produces = MediaTypes.HAL_JSON_VALUE)
-    public ResponseEntity<EntityModel<Incidencia>> updateCarrera(@PathVariable int id, @RequestBody Incidencia incidencia) {
+    public ResponseEntity<EntityModel<Incidencia>> updateIncidencia(@PathVariable int id, @RequestBody Incidencia incidencia) {
         incidencia.setId(id);
         Incidencia updatedIncidencia = incidenciaService.save(incidencia);
         return ResponseEntity

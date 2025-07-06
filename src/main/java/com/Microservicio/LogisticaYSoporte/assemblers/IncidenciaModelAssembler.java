@@ -16,7 +16,11 @@ public class IncidenciaModelAssembler implements RepresentationModelAssembler<In
     public EntityModel<Incidencia> toModel(Incidencia incidencia) {
         return EntityModel.of(incidencia,
                 linkTo(methodOn(IncidenciaControllerV2.class).getIncidenciaById(incidencia.getId())).withSelfRel(),
-                linkTo(methodOn(IncidenciaControllerV2.class).getAllIncidencias()).withRel("incidencias"));
+                linkTo(methodOn(IncidenciaControllerV2.class).getAllIncidencias()).withRel("incidencias"),
+                linkTo(methodOn(IncidenciaControllerV2.class).createIncidencia(null)).withRel("crear-incidencias"),
+                linkTo(methodOn(IncidenciaControllerV2.class).updateIncidencia(incidencia.getId(), null)).withRel("actualizar-incidencia"),
+                linkTo(methodOn(IncidenciaControllerV2.class).deleteIncidencia(incidencia.getId())).withRel("eliminar-incidencia")
+                );
     }
     
 }
